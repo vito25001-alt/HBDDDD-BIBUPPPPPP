@@ -1,0 +1,1019 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#171027" />
+    <title>For You, My Universe ✦</title>
+    <style>
+      :root {
+        --night: #120d22;
+        --night2: #211336;
+        --pink: #ffb8dc;
+        --pink2: #ff80c4;
+        --lavender: #d9c2ff;
+        --white: #fff8ff;
+        --muted: #d8cde7;
+        --glass: rgba(255, 255, 255, 0.075);
+        --line: rgba(255, 255, 255, 0.16);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        color: var(--white);
+        font-family:
+          ui-rounded,
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background:
+          radial-gradient(
+            ellipse at 15% 15%,
+            rgba(143, 76, 190, 0.28),
+            transparent 38%
+          ),
+          radial-gradient(
+            ellipse at 85% 35%,
+            rgba(231, 99, 176, 0.17),
+            transparent 35%
+          ),
+          linear-gradient(160deg, var(--night), var(--night2) 55%, #160e2c);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      #stars {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .aurora {
+        position: fixed;
+        inset: auto -20% -35%;
+        height: 55vh;
+        z-index: 0;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse,
+          rgba(183, 109, 231, 0.16),
+          transparent 68%
+        );
+        filter: blur(30px);
+      }
+      .site {
+        position: relative;
+        z-index: 1;
+      }
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px clamp(16px, 5vw, 60px);
+        backdrop-filter: blur(16px);
+        background: rgba(18, 13, 34, 0.64);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .brand {
+        font-size: 0.88rem;
+        letter-spacing: 0.12em;
+        color: var(--pink);
+        font-weight: 800;
+      }
+      .nav-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      button,
+      .btn {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 999px;
+        padding: 11px 17px;
+        font: inherit;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          background 0.2s,
+          border-color 0.2s;
+      }
+      button:hover,
+      .btn:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 184, 220, 0.16);
+        border-color: rgba(255, 184, 220, 0.6);
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 2px solid var(--pink);
+        outline-offset: 4px;
+      }
+      .primary {
+        background: linear-gradient(120deg, #f57fbd, #a98aff);
+        color: #27122f;
+        border: 0;
+        font-weight: 800;
+      }
+      .hero {
+        min-height: 88vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 75px 20px 65px;
+      }
+      .hero-inner {
+        max-width: 800px;
+      }
+      .eyebrow {
+        color: var(--pink);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        font-weight: 800;
+      }
+      h1 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(3rem, 9vw, 6.8rem);
+        line-height: 0.98;
+        font-weight: 500;
+        letter-spacing: -0.055em;
+        margin: 22px 0;
+      }
+      h1 span {
+        display: block;
+        color: var(--pink);
+        font-style: italic;
+        text-shadow: 0 0 38px rgba(255, 128, 196, 0.25);
+      }
+      .hero p {
+        color: var(--muted);
+        font-size: clamp(1rem, 2.5vw, 1.15rem);
+        line-height: 1.8;
+        max-width: 580px;
+        margin: 0 auto 28px;
+      }
+      .hero-buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .orbit {
+        width: 110px;
+        height: 110px;
+        margin: 0 auto 12px;
+        position: relative;
+        display: grid;
+        place-items: center;
+      }
+      .orbit .planet {
+        font-size: 3.5rem;
+        filter: drop-shadow(0 0 22px rgba(255, 160, 218, 0.7));
+        animation: float 4s ease-in-out infinite;
+      }
+      .orbit:before,
+      .orbit:after {
+        content: "";
+        position: absolute;
+        width: 105px;
+        height: 42px;
+        border: 1px solid rgba(255, 184, 220, 0.48);
+        border-radius: 50%;
+        transform: rotate(-28deg);
+      }
+      .orbit:after {
+        transform: rotate(55deg);
+        border-color: rgba(217, 194, 255, 0.4);
+      }
+      @keyframes float {
+        50% {
+          transform: translateY(-9px) rotate(5deg);
+        }
+      }
+      .scroll-note {
+        margin-top: 50px;
+        color: #b6a7ca;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+      }
+      section {
+        padding: 75px 20px;
+        scroll-margin-top: 68px;
+      }
+      .container {
+        max-width: 1050px;
+        margin: 0 auto;
+      }
+      .section-head {
+        text-align: center;
+        margin: 0 auto 32px;
+        max-width: 650px;
+      }
+      .section-head h2 {
+        font:
+          500 clamp(2rem, 5vw, 3.6rem)/1.1 Georgia,
+          serif;
+        margin: 12px 0;
+      }
+      .section-head p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 0;
+      }
+      .glass {
+        background: var(--glass);
+        border: 1px solid var(--line);
+        border-radius: 25px;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 20px 70px rgba(0, 0, 0, 0.15);
+      }
+      .letter-wrap {
+        max-width: 760px;
+        margin: auto;
+      }
+      .envelope {
+        position: relative;
+        overflow: hidden;
+        padding: 30px;
+        text-align: center;
+      }
+      .envelope-icon {
+        font-size: 4.2rem;
+        filter: drop-shadow(0 0 18px rgba(255, 128, 196, 0.3));
+      }
+      .envelope h3 {
+        font:
+          500 1.8rem Georgia,
+          serif;
+        margin: 12px 0;
+      }
+      .envelope p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+      .letter {
+        display: none;
+        margin-top: 18px;
+        padding: clamp(22px, 5vw, 42px);
+        text-align: left;
+        background: linear-gradient(
+          145deg,
+          rgba(255, 220, 241, 0.12),
+          rgba(211, 186, 255, 0.08)
+        );
+        border: 1px solid rgba(255, 184, 220, 0.28);
+        border-radius: 20px;
+      }
+      .letter.open {
+        display: block;
+        animation: reveal 0.7s ease both;
+      }
+      @keyframes reveal {
+        from {
+          opacity: 0;
+          transform: translateY(12px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .letter p {
+        line-height: 1.95;
+        color: #f5eafa;
+        white-space: pre-line;
+      }
+      .letter .signature {
+        text-align: right;
+        color: var(--pink);
+        font:
+          italic 1.4rem Georgia,
+          serif;
+        margin-top: 25px;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .photo-card {
+        padding: 12px;
+        transform: rotate(var(--tilt, 0deg));
+        transition: transform 0.25s;
+      }
+      .photo-card:hover {
+        transform: translateY(-5px) rotate(0deg);
+      }
+      .photo-frame {
+        aspect-ratio: 4/5;
+        overflow: hidden;
+        border-radius: 15px;
+        background: linear-gradient(145deg, #5a3b76, #bd78aa);
+        display: grid;
+        place-items: center;
+        position: relative;
+      }
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .photo-placeholder {
+        text-align: center;
+        padding: 20px;
+        color: #fff0fb;
+      }
+      .photo-placeholder span {
+        font-size: 2.5rem;
+        display: block;
+        margin-bottom: 12px;
+      }
+      .photo-caption {
+        padding: 13px 4px 5px;
+        color: #f8e8f6;
+        font:
+          italic 1rem Georgia,
+          serif;
+        text-align: center;
+      }
+      .small-note {
+        color: #bdaecf;
+        text-align: center;
+        font-size: 0.85rem;
+        margin-top: 17px;
+      }
+      .game-card {
+        max-width: 680px;
+        margin: auto;
+        padding: clamp(22px, 5vw, 38px);
+        text-align: center;
+      }
+      .progress {
+        height: 5px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        margin: 18px 0 25px;
+      }
+      .progress span {
+        display: block;
+        width: 0;
+        height: 100%;
+        background: linear-gradient(90deg, var(--pink2), var(--lavender));
+        transition: width 0.3s;
+      }
+      #question {
+        font:
+          500 clamp(1.4rem, 4vw, 2rem) Georgia,
+          serif;
+        margin: 10px 0 22px;
+      }
+      .answers {
+        display: grid;
+        gap: 10px;
+      }
+      .answers button {
+        border-radius: 15px;
+        padding: 14px;
+        text-align: left;
+      }
+      .answers button.correct {
+        border-color: #9ee6c3;
+        background: rgba(92, 210, 153, 0.15);
+      }
+      .answers button.wrong {
+        border-color: #ff9fc9;
+        background: rgba(255, 100, 160, 0.13);
+      }
+      #game-feedback {
+        min-height: 28px;
+        color: var(--pink);
+        margin-top: 16px;
+      }
+      .result {
+        display: none;
+        padding: 20px 0 0;
+      }
+      .result.show {
+        display: block;
+        animation: reveal 0.5s ease both;
+      }
+      .result .big-heart {
+        font-size: 3.4rem;
+        animation: float 2s infinite;
+      }
+      .final-card {
+        max-width: 760px;
+        text-align: center;
+        margin: auto;
+        padding: clamp(25px, 5vw, 48px);
+      }
+      .final-card h3 {
+        font:
+          italic 2.3rem Georgia,
+          serif;
+        color: var(--pink);
+        margin: 10px 0 15px;
+      }
+      .final-card p {
+        color: var(--muted);
+        line-height: 1.9;
+      }
+      .secret {
+        display: none;
+        margin-top: 25px;
+        padding: 24px;
+        border-radius: 18px;
+        background: rgba(255, 184, 220, 0.09);
+        border: 1px solid rgba(255, 184, 220, 0.25);
+      }
+      .secret.show {
+        display: block;
+        animation: reveal 0.6s ease both;
+      }
+      .secret .promise {
+        font:
+          italic 1.3rem/1.7 Georgia,
+          serif;
+        color: #ffe1f2;
+      }
+      footer {
+        padding: 35px 20px 50px;
+        text-align: center;
+        color: #b4a5c7;
+        font-size: 0.82rem;
+      }
+      .heart-pop {
+        position: fixed;
+        pointer-events: none;
+        z-index: 30;
+        animation: pop 1.7s ease-out forwards;
+        font-size: 20px;
+      }
+      @keyframes pop {
+        from {
+          opacity: 1;
+          transform: translateY(0) scale(0.7) rotate(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-130px) scale(1.6) rotate(25deg);
+        }
+      }
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translate(-50%, 20px);
+        opacity: 0;
+        z-index: 50;
+        background: #f8d9ef;
+        color: #301737;
+        padding: 12px 18px;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        transition: 0.3s;
+        pointer-events: none;
+        text-align: center;
+        max-width: 90vw;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      @media (max-width: 700px) {
+        nav {
+          padding: 12px 14px;
+        }
+        .brand {
+          font-size: 0.72rem;
+          letter-spacing: 0.07em;
+        }
+        .nav-actions button {
+          padding: 9px 12px;
+          font-size: 0.78rem;
+        }
+        .hero {
+          min-height: 82vh;
+          padding-top: 65px;
+        }
+        section {
+          padding: 58px 16px;
+        }
+        .gallery {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .photo-card:last-child {
+          grid-column: 1 / -1;
+          max-width: 70%;
+          justify-self: center;
+        }
+        .envelope {
+          padding: 23px 17px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="site">
+      <nav>
+        <div class="brand">✦ YOUR LITTLE UNIVERSE</div>
+        <div class="nav-actions">
+          <button id="musicBtn" aria-label="Putar musik">♫ Musik: OFF</button>
+          <button
+            onclick="
+              document
+                .querySelector('#letter-section')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            Surat ✉
+          </button>
+        </div>
+      </nav>
+
+      <header class="hero">
+        <div class="hero-inner">
+          <div class="orbit"><div class="planet">💗</div></div>
+          <div class="eyebrow">A little universe, just for you</div>
+          <h1>Happy Birthday,<span id="heroName">My Favorite Person</span></h1>
+          <p>
+            Di antara miliaran bintang di langit, aku bersyukur semesta
+            mempertemukan aku dengan kamu. Hari ini, halaman kecil ini dibuat
+            khusus untuk seseorang yang begitu berarti.
+          </p>
+          <div class="hero-buttons">
+            <button class="primary" onclick="openSurprise()">
+              Buka kejutanmu ✨
+            </button>
+            <button
+              onclick="
+                document
+                  .querySelector('#memories')
+                  .scrollIntoView({ behavior: 'smooth' })
+              "
+            >
+              Lihat kenangan ↓
+            </button>
+          </div>
+          <div class="scroll-note">
+            SCROLL PELAN-PELAN, ADA BEBERAPA KEJUTAN DI BAWAH
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section id="letter-section">
+          <div class="container">
+            <div class="section-head">
+              <div class="eyebrow">Words from my heart</div>
+              <h2>A letter for you 💌</h2>
+              <p>
+                Ada beberapa hal yang mungkin lebih mudah ditulis daripada
+                diucapkan langsung.
+              </p>
+            </div>
+            <div class="letter-wrap">
+              <div class="glass envelope">
+                <div class="envelope-icon">💌</div>
+                <h3>Untuk kamu, di hari spesialmu</h3>
+                <p>
+                  Surat kecil ini cuma punya satu penerima. Tekan tombol di
+                  bawah untuk membukanya.
+                </p>
+                <button class="primary" id="letterBtn" onclick="toggleLetter()">
+                  Buka suratnya
+                </button>
+                <article class="letter" id="letter">
+                  <p id="letterText">
+                    Hai, sayang. Selamat ulang tahunnn, sayanggg kuuu cantikk
+                    kuuu nadiaa nur azkiaa. 🤍 Aku berharap di umur kamu yang
+                    baru ini, hal-hal baik makin sering datang ke hidup kamuu.
+                    Semoga kamu selalu diberi kesehatan, hati yang tenang,
+                    diberi kesabarannn, dan banyak alasan untuk tersenyum.
+                    Terima kasih sudah hadir dan membawa warna yang berbeda ke
+                    hari-hariku. Aku mungkin belum selalu bisa jadi yang paling
+                    sempurna, tapi aku ingin terus belajar menjadi seseorang
+                    yang bisa dengerinn kamuu, menghargai kamuu, dan menjadi
+                    yang kamu butuhkan. Hari ini bukan cuma tentang bertambahnya
+                    umur kamu bagi aku, tapi merayakan seseorang yang
+                    keberadaannya begitu berarti. Jangan lupa bangga sama dirimu
+                    sendiri, ya. Kamu sudah melewati banyak hal untuk sampai di
+                    hari ini. Semoga tahun ini mempertemukan kamu dengan lebih
+                    banyak kebahagiaan. Dan semoga, di antara banyak cerita yang
+                    akan kamu jalani, kita masih bisa membuat banyak kenangan
+                    indah bersama. Happy birthday, my favorite person. Semoga
+                    kamu selalu menemukan cahaya, bahkan di hari yang terasa
+                    paling redup.
+                  </p>
+                  <div class="signature">
+                    Vito Zuldhan, Persib CR7 Marquez Efootball ♡
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="memories">
+          <div class="container">
+            <div class="section-head">
+              <div class="eyebrow">Little moments, big feelings</div>
+              <h2>Our tiny memories 📸</h2>
+              <p>
+                Beberapa momen sederhana bisa jadi kenangan yang ingin disimpan
+                lama-lama.
+              </p>
+            </div>
+            <div class="gallery">
+              <div class="glass photo-card" style="--tilt: -2deg">
+                <div class="photo-frame">
+                  <img
+                    src="foto1.jpg"
+                    alt="Kenangan pertama"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'block';
+                    "
+                  />
+                  <div class="photo-placeholder" style="display: none">
+                    <span>🌷</span>Tambahkan foto pertama
+                  </div>
+                </div>
+                <div class="photo-caption">A moment I keep close</div>
+              </div>
+              <div class="glass photo-card" style="--tilt: 1.5deg">
+                <div class="photo-frame">
+                  <img
+                    src="foto2.jpg"
+                    alt="Kenangan kedua"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'block';
+                    "
+                  />
+                  <div class="photo-placeholder" style="display: none">
+                    <span>🌙</span>Tambahkan foto kedua
+                  </div>
+                </div>
+                <div class="photo-caption">You make it brighter</div>
+              </div>
+              <div class="glass photo-card" style="--tilt: -1deg">
+                <div class="photo-frame">
+                  <img
+                    src="foto3.jpg"
+                    alt="Kenangan ketiga"
+                    onerror="
+                      this.style.display = 'none';
+                      this.nextElementSibling.style.display = 'block';
+                    "
+                  />
+                  <div class="photo-placeholder" style="display: none">
+                    <span>🪻</span>Tambahkan foto ketiga
+                  </div>
+                </div>
+                <div class="photo-caption">One of my favorite days</div>
+              </div>
+            </div>
+            <p class="small-note">
+              Psst… ganti foto contoh dengan foto kalian sendiri supaya lebih
+              personal.
+            </p>
+          </div>
+        </section>
+
+        <section id="game">
+          <div class="container">
+            <div class="section-head">
+              <div class="eyebrow">A tiny game for you</div>
+              <h2>Seberapa kenal kamu? 🌟</h2>
+              <p>
+                Jawab tiga pertanyaan kecil untuk membuka satu pesan spesial.
+                Jawab santai saja—ini bukan ujian, kok.
+              </p>
+            </div>
+            <div class="glass game-card">
+              <div id="game-counter">PERTANYAAN 1 DARI 3</div>
+              <div class="progress"><span id="progressBar"></span></div>
+              <div id="question">Siap menerima kejutan kecil?</div>
+              <div class="answers" id="answers"></div>
+              <div id="game-feedback" aria-live="polite"></div>
+              <div class="result" id="gameResult">
+                <div class="big-heart">💖</div>
+                <h3>Kamu berhasil sampai akhir!</h3>
+                <p>
+                  Hadiahmu bukan skor, tapi satu pengingat: kamu pantas
+                  dirayakan hari ini dan setiap hari.
+                </p>
+                <button
+                  class="primary"
+                  onclick="
+                    document
+                      .querySelector('#finale')
+                      .scrollIntoView({ behavior: 'smooth' })
+                  "
+                >
+                  Ambil kejutan terakhir ✨
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="finale">
+          <div class="container">
+            <div class="section-head">
+              <div class="eyebrow">One last little thing</div>
+              <h2>Make a wish 🌠</h2>
+              <p>
+                Tarik napas, pejamkan mata sebentar, lalu pikirkan satu harapan
+                untuk tahun barumu.
+              </p>
+            </div>
+            <div class="glass final-card">
+              <div style="font-size: 3.3rem">🌌</div>
+              <h3>For all the tomorrows</h3>
+              <p>
+                Semoga langkahmu selalu didekatkan dengan hal-hal yang baik.
+                Semoga kamu tumbuh tanpa kehilangan hal-hal kecil yang membuatmu
+                jadi dirimu sendiri.
+              </p>
+              <button class="primary" id="wishBtn" onclick="revealSecret()">
+                Aku sudah membuat harapan ✨
+              </button>
+              <div class="secret" id="secret">
+                <div style="font-size: 2rem">💗 ✨ 💗</div>
+                <p class="promise" id="finalMessage">
+                  Kalau suatu hari kamu lupa betapa berharganya dirimu, semoga
+                  halaman kecil ini mengingatkanmu lagi. Selamat ulang tahun,
+                  orang kesayanganku. Dunia lebih indah karena ada kamu.
+                </p>
+                <p>Terima kasih sudah menjadi kamu. Happy birthday! ♡</p>
+                <button onclick="heartRain()">Kirim hujan hati 💕</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer>
+        Dibuat dengan banyak rasa sayang, khusus untuk
+        <span id="footerName">Nadia Nur Azkia</span>. ♡<br />
+        <span style="display: inline-block; margin-top: 8px"
+          >A little universe made just for you ✦</span
+        >
+      </footer>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+
+    <script>
+      /*
+      PERSONALISASI CEPAT:
+      1. Ubah nama di variabel CONFIG.
+      2. Letakkan foto kalian dalam folder yang sama dengan file HTML, lalu namai foto1.jpg, foto2.jpg, foto3.jpg.
+      3. Ganti pesan surat dan pesan terakhir sesuai cerita kalian.
+      4. Untuk musik, letakkan file musik.mp3 di folder yang sama. Gunakan musik yang kamu punya hak untuk gunakan.
+    */
+      const CONFIG = {
+        nama: "Nadia Nur Azkia",
+        pesanAkhir:
+          "Kalau suatu hari kamu lupa betapa berharganya dirimu, semoga halaman kecil ini mengingatkanmu lagi. Selamat ulang tahun, orang kesayanganku. Dunia lebih indah karena ada kamu.",
+        musik: "musik.mp3",
+      };
+      document.title = `Happy Birthday, ${CONFIG.nama} ♡`;
+      document.getElementById("heroName").textContent = CONFIG.nama;
+      document.getElementById("footerName").textContent = CONFIG.nama;
+      document.getElementById("finalMessage").textContent = CONFIG.pesanAkhir;
+
+      // Bintang bergerak ringan di latar belakang.
+      const canvas = document.getElementById("stars"),
+        ctx = canvas.getContext("2d");
+      let stars = [],
+        width = 0,
+        height = 0;
+      function resizeStars() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = width + "px";
+        canvas.style.height = height + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const count = Math.min(150, Math.floor((width * height) / 8500));
+        stars = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: Math.random() * 1.5 + 0.3,
+          a: Math.random() * 0.65 + 0.2,
+          speed: Math.random() * 0.009 + 0.002,
+          phase: Math.random() * 6,
+        }));
+      }
+      function drawStars(t = 0) {
+        ctx.clearRect(0, 0, width, height);
+        for (const s of stars) {
+          const alpha = s.a * (0.65 + 0.35 * Math.sin(t * s.speed + s.phase));
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,225,250,${alpha})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(drawStars);
+      }
+      window.addEventListener("resize", resizeStars);
+      resizeStars();
+      requestAnimationFrame(drawStars);
+
+      function toast(message) {
+        const el = document.getElementById("toast");
+        el.textContent = message;
+        el.classList.add("show");
+        clearTimeout(toast.timer);
+        toast.timer = setTimeout(() => el.classList.remove("show"), 2600);
+      }
+      function openSurprise() {
+        document
+          .querySelector("#letter-section")
+          .scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+          if (!document.getElementById("letter").classList.contains("open"))
+            toggleLetter();
+        }, 500);
+        heartRain(12);
+      }
+      function toggleLetter() {
+        const letter = document.getElementById("letter");
+        const isOpen = letter.classList.toggle("open");
+        document.getElementById("letterBtn").textContent = isOpen
+          ? "Tutup suratnya"
+          : "Buka suratnya";
+        if (isOpen) heartRain(8);
+      }
+
+      // Musik tidak diputar otomatis; browser meminta interaksi pengguna terlebih dahulu.
+      const audio = new Audio(CONFIG.musik);
+      audio.loop = true;
+      audio.volume = 0.45;
+      const musicBtn = document.getElementById("musicBtn");
+      musicBtn.addEventListener("click", async () => {
+        try {
+          if (audio.paused) {
+            await audio.play();
+            musicBtn.textContent = "♫ Musik: ON";
+            toast("Musik mulai diputar ♫");
+          } else {
+            audio.pause();
+            musicBtn.textContent = "♫ Musik: OFF";
+            toast("Musik dijeda");
+          }
+        } catch (e) {
+          toast("Tambahkan file musik.mp3 di folder website, lalu coba lagi.");
+        }
+      });
+
+      const questions = [
+        {
+          q: "Apa hadiah paling sederhana yang bisa bikin hari terasa lebih baik?",
+          a: [
+            "Waktu dan perhatian tulus",
+            "Jadi orang paling sibuk",
+            "Melupakan waktu istirahat",
+          ],
+          correct: 0,
+          feedback: [
+            "Betul—hal kecil yang tulus sering paling berarti. 💗",
+            "Hehe, coba pikirkan hal yang bikin hati hangat.",
+            "Jangan lupa istirahat juga, ya.",
+          ],
+        },
+        {
+          q: "Kalau harimu sedang berat, apa yang paling pantas kamu dapatkan?",
+          a: [
+            "Tekanan tambahan",
+            "Waktu untuk bernapas dan dukungan",
+            "Harus selalu terlihat kuat",
+          ],
+          correct: 1,
+          feedback: [
+            "Kamu tetap pantas disayangi bahkan saat lelah. 🤍",
+            "Iya! Kamu boleh beristirahat dan menerima dukungan.",
+            "Kamu tidak harus kuat setiap saat.",
+          ],
+        },
+        {
+          q: "Apa pesan yang paling ingin kamu bawa ke umur yang baru?",
+          a: [
+            "Aku harus sempurna",
+            "Aku tidak boleh gagal",
+            "Aku layak bahagia dan terus bertumbuh",
+          ],
+          correct: 2,
+          feedback: [
+            "Kamu tidak perlu sempurna untuk berharga. ✨",
+            "Kesalahan juga bagian dari belajar.",
+            "Benar! Semoga kamu selalu ingat itu. 💖",
+          ],
+        },
+      ];
+      let qIndex = 0,
+        answered = false;
+      function renderQuestion() {
+        const q = questions[qIndex];
+        document.getElementById("game-counter").textContent =
+          `PERTANYAAN ${qIndex + 1} DARI ${questions.length}`;
+        document.getElementById("progressBar").style.width =
+          `${(qIndex / questions.length) * 100}%`;
+        document.getElementById("question").textContent = q.q;
+        document.getElementById("game-feedback").textContent = "";
+        const answers = document.getElementById("answers");
+        answers.innerHTML = "";
+        answered = false;
+        q.a.forEach((answer, i) => {
+          const btn = document.createElement("button");
+          btn.textContent = answer;
+          btn.addEventListener("click", () => chooseAnswer(i, btn));
+          answers.appendChild(btn);
+        });
+      }
+      function chooseAnswer(index, button) {
+        if (answered) return;
+        answered = true;
+        const q = questions[qIndex];
+        [...document.querySelectorAll("#answers button")].forEach(
+          (b) => (b.disabled = true),
+        );
+        button.classList.add(index === q.correct ? "correct" : "wrong");
+        document.getElementById("game-feedback").textContent =
+          q.feedback[index];
+        if (index === q.correct) heartRain(5);
+        setTimeout(() => {
+          qIndex++;
+          if (qIndex < questions.length) renderQuestion();
+          else {
+            document.getElementById("progressBar").style.width = "100%";
+            document.getElementById("question").textContent =
+              "Kejutan kecil berhasil dibuka!";
+            document.getElementById("answers").innerHTML = "";
+            document.getElementById("game-feedback").textContent = "";
+            document.getElementById("gameResult").classList.add("show");
+            heartRain(18);
+          }
+        }, 1150);
+      }
+      renderQuestion();
+
+      function revealSecret() {
+        document.getElementById("secret").classList.add("show");
+        document.getElementById("wishBtn").textContent =
+          "Harapanmu tersimpan di semesta ♡";
+        document.getElementById("wishBtn").disabled = true;
+        heartRain(24);
+        toast("Semoga harapan baikmu menemukan jalannya ✨");
+      }
+      function heartRain(amount = 24) {
+        const symbols = ["💗", "♡", "✨", "💕", "✦", "💖"];
+        for (let i = 0; i < amount; i++) {
+          setTimeout(() => {
+            const el = document.createElement("span");
+            el.className = "heart-pop";
+            el.textContent =
+              symbols[Math.floor(Math.random() * symbols.length)];
+            el.style.left = 5 + Math.random() * 90 + "vw";
+            el.style.top = 45 + Math.random() * 45 + "vh";
+            el.style.fontSize = 16 + Math.random() * 18 + "px";
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 1800);
+          }, i * 45);
+        }
+      }
+    </script>
+  </body>
+</html>
